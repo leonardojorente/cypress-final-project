@@ -1,0 +1,20 @@
+name: Basic Cypress tests
+on: 
+  workflow_dispatch:
+
+jobs:
+e2e-tests:
+  runs-on: ubuntu-latest
+  steps:
+      #clone do projeto
+      - uses: actions/checkout@v4
+
+      #instalacao do node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Cypress run api tests
+        uses: cypress-io/github-action@v6
+        with:
+          command: npm run runSimplteTest

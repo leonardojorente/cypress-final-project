@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "open Cypress Test Runner": "cypress open",
+    "runSimplteTest": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/login-tests.spec.cy.js'"
+  },
+  "devDependencies": {
+    "cypress": "^14.4.1"
+  }
+}
