@@ -1,12 +1,21 @@
 {
   "scripts": {
     "open Cypress Test Runner": "cypress open",
-    "runSimplteTest": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/login-tests.spec.cy.js'"
+    "runSimplteTest": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/login-tests.spec.cy.js'",
+    "UI: login tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/login-tests.spec.cy.js'",
+    "UI: LOG tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/log-tests.spec.cy.js'",
+    "UI: cross env dev tests": "cross-env TEST_ENV=dev npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
+    "UI: cross env prod tests": "cross-env TEST_ENV=prod npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'"
+
+
   },
   "devDependencies": {
+    "@cypress/grep": "^4.1.0",
+    "cross-env": "^7.0.3",
     "cypress": "^14.4.1"
   },
   "dependencies": {
+    "cypress-xpath": "^2.0.1",
     "dotenv": "^16.5.0"
   }
 }

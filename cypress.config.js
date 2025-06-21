@@ -1,9 +1,28 @@
-const { defineConfig } = require("cypress");
+const { defineConfig } = require("cypress")
+
+const dotEnvPath = process.env.TEST_ENV ? `.env.${process.env.TEST_ENV}` : '.env'
+require('dotenv').config({
+   path: dotEnvPath,
+   override: true 
+})
 
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      require('@cypress/grep/src/plugin')(config); // Register the grep plugin for filtering tests
+           
+      config.env = {// Load environment variables from .env file
+        ...process.env
+      }
+
+      on('task', {// Define a task to log messages in Cypress
+        log(message) {
+          console.log('Cypress log:', message);
+          return null; // Must return something (or `null`)
+        }
+      })
+
+      return config;
     },
   },
 });

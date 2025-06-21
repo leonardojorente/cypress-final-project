@@ -24,22 +24,16 @@ describe('E2E Login Tests', () => {
 
   })
 
-  it('LoginTC01: Success Login', { tags: '@smoke' }, () => {
+  it('LoginTC01: LOG test', { tags: '@smoke' }, () => {
     cy.SelectSettingsOption(topMenuComponentData.settings_option_logout)
     cy.get(locators.TOAST_MESSAGE, { timeout: 10000 }).should('contain',toastmessagedata.successLogout) 
-
+    
+    cy.task('log', `Environment variable for USER: ${Cypress.env('USER')}`)
     cy.InsertEmail(userName)
+
+    cy.task('log', `Environment variable for PASSWORD: ${Cypress.env('PASSWORD')}`)
     cy.InsertPassword(password)
-    cy.ClickLoginButton()
 
-    cy.get(locators.TOAST_MESSAGE, { timeout: 10000 }).should('contain',toastmessagedata.successLoginToastMessage) 
-  })
-
-  it('LoginTC02: fail login to test screenshot report', () => {
-    const wrongPassword = "wrongPassword"
-
-    cy.InsertEmail(userName)
-    cy.InsertPassword(wrongPassword)
     cy.ClickLoginButton()
 
     cy.get(locators.TOAST_MESSAGE, { timeout: 10000 }).should('contain',toastmessagedata.successLoginToastMessage) 

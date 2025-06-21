@@ -4,3 +4,5 @@ screenshots/
 downloads/
 runner-results/
 .env
+.env.prod
+.env.dev
