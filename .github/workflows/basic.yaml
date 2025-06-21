@@ -20,4 +20,4 @@ jobs:
       - name: Cypress run api tests
         uses: cypress-io/github-action@v6
         with:
-          command: npm run runSimplteTest
+          command: npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/basic-tests.spec.cy.js'
