@@ -1,5 +1,6 @@
 // SETUP TO RUN BEFORE ALL TESTS
 import 'cypress-xpath'
+import '@shelex/cypress-allure-plugin'
 import registerCypressGrep from '@cypress/grep'
 registerCypressGrep()
 

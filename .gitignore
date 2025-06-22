@@ -6,3 +6,5 @@ runner-results/
 .env
 .env.prod
 .env.dev
+allure-report/
+allure-results/

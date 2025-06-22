@@ -69,3 +69,8 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
           BASE_URL_API: ${{ vars.BASE_URL_API }}
+
+      - name: Generate Allure Report
+        run: |
+          allure generate allure-results --clean
+          allure serve allure-results
