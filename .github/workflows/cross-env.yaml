@@ -72,5 +72,5 @@ jobs:
 
       - name: Generate Allure Report
         run: |
-          allure generate allure-results --clean
-          allure serve allure-results
+          alureReport
+          alureReportOpen

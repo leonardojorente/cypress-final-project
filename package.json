@@ -8,8 +8,8 @@
     "UI: cross env dev tests": "cross-env TEST_ENV=dev npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
     "UI: cross env prod tests": "cross-env TEST_ENV=prod npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
 
-    "UI: alure report": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/log-tests.spec.cy.js' --env allure=true",
-    "UI: alure report open": "allure generate allure-results --clean && allure open"
+    "alureReport": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/log-tests.spec.cy.js' --env allure=true",
+    "alureReportOpen": "allure generate allure-results --clean && allure open"
   },
   "devDependencies": {
     "@cypress/grep": "^4.1.0",
