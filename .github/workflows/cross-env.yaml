@@ -63,7 +63,7 @@ jobs:
       - name: Cypress run api tests
         uses: cypress-io/github-action@v6
         with:
-          command: npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/basic-tests.spec.cy.js'
+          command: npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/log-tests.spec.cy.js' --env allure=true'
         env:
           USER:  ${{ vars.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
@@ -72,5 +72,5 @@ jobs:
 
       - name: Generate Allure Report
         run: |
-          alureReport
-          alureReportOpen
+          npx allure generate allure-results --clean
+          npx allure open
