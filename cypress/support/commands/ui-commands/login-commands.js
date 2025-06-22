@@ -17,8 +17,8 @@ Cypress.Commands.add('ClickLoginButton', () =>{
     cy.get(locators.LOGIN_SCREEN.LOGIN_BTN).click()
 })
 
-Cypress.Commands.add('doLoginWeb', (email, password) =>{
-    cy.session([email, password], () => {
+Cypress.Commands.add('doLoginWebCachingSession', (email, password) =>{
+    cy.session([email, password], () => { //cache login session for performance
         cy.visit('https://barrigareact.wcaquino.me')
         cy.log('Login application')
         cy.InsertEmail(email)

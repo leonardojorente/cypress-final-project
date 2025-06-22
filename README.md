@@ -21,6 +21,5 @@ Set log to cypress
 Set ESLint
     1-https://medium.com/@beginners_log/set-up-linter-and-prettier-for-your-cypress-project-flat-config-a4af886f4101    
 
-Set alure report
-    1-npm install --save-dev @shelex/cypress-allure-plugin allure-commandline
-        
+set json schema validator ajv
+    1-npm i ajv

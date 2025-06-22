@@ -1,5 +1,6 @@
 const { defineConfig } = require("cypress")
-const allureWriter = require('@shelex/cypress-allure-plugin/writer');
+const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');
+
 
 const dotEnvPath = process.env.TEST_ENV ? `.env.${process.env.TEST_ENV}` : '.env'
 require('dotenv').config({
@@ -9,9 +10,23 @@ require('dotenv').config({
 
 module.exports = defineConfig({
   e2e: {
+    reporter: 'cypress-mochawesome-reporter',
+    reporterOptions: {
+      charts: true,
+      reportPageTitle: 'Cypress Test Report',
+      reportDir: 'cypress/reports',
+      overwrite: true,
+      embeddedScreenshots: true,
+      inlineAssets: true,
+      saveAllAttempts: false,
+      autoOpen: true,
+      html: true,
+      json: false,
+    },
+
     setupNodeEvents(on, config) {
       require('@cypress/grep/src/plugin')(config); // Register the grep plugin for filtering tests
-      allureWriter(on, config); // Enable Allure plugin
+      require('cypress-mochawesome-reporter/plugin')(on);
 
       config.env = {// Load environment variables from .env file
         ...process.env
