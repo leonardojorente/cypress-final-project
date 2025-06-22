@@ -1,18 +1,21 @@
 {
   "scripts": {
+    "ESLint": "eslint ./cypress --ext .js",
     "open Cypress Test Runner": "cypress open",
     "UI: basic tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/basic-tests.spec.cy.js'",
     "UI: login tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/login-tests.spec.cy.js'",
     "UI: LOG tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/log-tests.spec.cy.js'",
     "UI: cross env dev tests": "cross-env TEST_ENV=dev npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
     "UI: cross env prod tests": "cross-env TEST_ENV=prod npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'"
-
-
   },
   "devDependencies": {
     "@cypress/grep": "^4.1.0",
+    "@eslint/js": "^9.29.0",
     "cross-env": "^7.0.3",
-    "cypress": "^14.4.1"
+    "cypress": "^14.4.1",
+    "eslint": "^9.29.0",
+    "eslint-plugin-cypress": "^5.1.0",
+    "globals": "^16.2.0"
   },
   "dependencies": {
     "cypress-xpath": "^2.0.1",

@@ -17,3 +17,6 @@ Set grep for tag
 Set log to cypress
     1-set on task on sypress.config.js
     2-check test log-tests
+
+Set ESLint
+    1-https://medium.com/@beginners_log/set-up-linter-and-prettier-for-your-cypress-project-flat-config-a4af886f4101    

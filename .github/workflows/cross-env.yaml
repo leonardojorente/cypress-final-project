@@ -9,7 +9,6 @@ on:
         type: environment
         default: dev
         
-
 jobs:
   option-example:
     runs-on: ubuntu-latest
@@ -18,7 +17,25 @@ jobs:
       - name: Send greeting
         run: echo "input environment selected -> ${{ github.event.inputs.environment }}"
 
+  pre-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x    
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check ESLint 
+        run: npx eslint ./cypress --ext .js
+
+
   e2e-tests:
+    needs: pre-check
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
     container:
