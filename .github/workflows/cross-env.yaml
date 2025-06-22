@@ -70,6 +70,12 @@ jobs:
           BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
           BASE_URL_API: ${{ vars.BASE_URL_API }}
 
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
       - name: Generate Allure Report
         run: |
           npx allure generate allure-results --clean
