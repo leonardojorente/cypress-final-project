@@ -8,7 +8,8 @@
     "UI: cross env dev tests": "cross-env TEST_ENV=dev npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
     "UI: cross env prod tests": "cross-env TEST_ENV=prod npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
     "UI: mochaAwesomeReport": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/mocha-report-tests.spec.cy.js' --reporter cypress-mochawesome-reporter",
-    
+    "UI: network tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/network-intercept-tests.spec.cy.js'",
+
     "api:apiTests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/*.spec.cy.js",
     "api:apiTestsLogin": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/login-collection-tests.spec.cy.js",
     "api:performance": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/performance-tests.spec.cy.js",
@@ -16,7 +17,6 @@
     "api:transaction tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/transactions-collection-tests.spec.cy.js",
     "api:account tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/account-collection-tests.spec.cy.js",
     "api:tag tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/ --env grepTags=@testtag",
-
 
     "open Cypress Test Runner": "cypress open"
   },
