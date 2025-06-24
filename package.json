@@ -1,24 +1,25 @@
 {
   "scripts": {
-    "ESLint": "eslint ./cypress --ext .js",
-    "UI: basic tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/basic-tests.spec.cy.js'",
-    "UI: login tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/login-tests.spec.cy.js'",
-    "UI: account tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/account-tests.spec.cy.js'",
-    "UI: LOG tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/log-tests.spec.cy.js'",
-    "UI: cross env dev tests": "cross-env TEST_ENV=dev npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
-    "UI: cross env prod tests": "cross-env TEST_ENV=prod npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
-    "UI: mochaAwesomeReport": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/mocha-report-tests.spec.cy.js' --reporter cypress-mochawesome-reporter",
-    "UI: network tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/network-intercept-tests.spec.cy.js'",
+    "eslint": "eslint ./cypress --ext .js",
+    "ui-basic-tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/basic-tests.spec.cy.js'",
+    "ui-login-tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/login-tests.spec.cy.js'",
+    "ui-account-tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/account-tests.spec.cy.js'",
+    "ui-log-tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/log-tests.spec.cy.js'",
+    "ui-cross-env-dev-tests": "cross-env TEST_ENV=dev npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
+    "ui-cross-env-prod-tests": "cross-env TEST_ENV=prod npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
+    "ui-mochaAwesomeReport": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/mocha-report-tests.spec.cy.js' --reporter cypress-mochawesome-reporter",
+    "ui-network-tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/network-intercept-tests.spec.cy.js'",
 
-    "api:apiTests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/*.spec.cy.js",
-    "api:apiTestsLogin": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/login-collection-tests.spec.cy.js",
-    "api:performance": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/performance-tests.spec.cy.js",
-    "api:json schema": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/json-schema-tests.spec.cy.js",
-    "api:transaction tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/transactions-collection-tests.spec.cy.js",
-    "api:account tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/account-collection-tests.spec.cy.js",
-    "api:tag tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/ --env grepTags=@testtag",
+    "api-tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/*.spec.cy.js",
+    "api-login-tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/login-collection-tests.spec.cy.js",
+    "api-performance-tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/performance-tests.spec.cy.js",
+    "api-json-schema-tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/json-schema-tests.spec.cy.js",
+    "api-transaction-tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/transactions-collection-tests.spec.cy.js",
+    "api-account-tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/account-collection-tests.spec.cy.js",
+    "api-tag-tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/ --env grepTags=@testtag",
+    "api-best-practice-tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/best-practice-assert-tests.spec.cy.js",
 
-    "open Cypress Test Runner": "cypress open"
+    "open-cypress-test-runner": "cypress open"
   },
   "devDependencies": {
     "@cypress/grep": "^4.1.0",
