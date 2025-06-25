@@ -24,10 +24,7 @@ describe('E2E Login Tests', () => {
 
   })
 
-  it('LoginTC01: Cross env test', { tags: '@smoke' }, () => {
-    cy.SelectSettingsOption(topMenuComponentData.settings_option_logout)
-    cy.get(locators.TOAST_MESSAGE, { timeout: 10000 }).should('contain',toastmessagedata.successLogout) 
-    
+  it('TC01: Cross env test', { tags: '@smoke' }, () => {    
     cy.task('log', `Environment variable for USER: ${Cypress.env('USER')}`)
     cy.InsertEmail(userName)
 

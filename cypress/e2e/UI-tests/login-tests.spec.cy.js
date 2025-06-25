@@ -21,13 +21,9 @@ describe('E2E Login Tests', () => {
 
   beforeEach(() => {
     cy.visit(baseUrlWeb)
-
   })
 
   it('LoginTC01: Success Login', { tags: '@smoke' }, () => {
-    cy.SelectSettingsOption(topMenuComponentData.settings_option_logout)
-    cy.get(locators.TOAST_MESSAGE, { timeout: 10000 }).should('contain',toastmessagedata.successLogout) 
-
     cy.InsertEmail(userName)
     cy.InsertPassword(password)
     cy.ClickLoginButton()

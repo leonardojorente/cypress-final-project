@@ -16,9 +16,6 @@ before(() => {
   LoginPayload.email = userName
   LoginPayload.senha = password
 
-  //web login
-  cy.doLoginWebCachingSession(userName, password)
-
   //get token for api tests
   cy.doLoginAPI(LoginPayload)
   .then(response =>{

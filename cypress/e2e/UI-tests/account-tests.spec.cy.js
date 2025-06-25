@@ -17,6 +17,8 @@ describe('E2E Account Tests', () => {
     cy.fixture('label-messages/toast-message').then((data) => {
       toastmessagedata = data
     })
+
+    cy.doLoginWebCachingSession(Cypress.env('USER'), Cypress.env('PASSWORD'))
   })
   beforeEach(() => {
     cy.visit(baseUrlWeb)

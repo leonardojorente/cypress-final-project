@@ -21,13 +21,9 @@ describe('E2E Login Tests', () => {
 
   beforeEach(() => {
     cy.visit(baseUrlWeb)
-
   })
 
-  it('LoginTC01: LOG test', { tags: '@smoke' }, () => {
-    cy.SelectSettingsOption(topMenuComponentData.settings_option_logout)
-    cy.get(locators.TOAST_MESSAGE, { timeout: 10000 }).should('contain',toastmessagedata.successLogout) 
-    
+  it('TC01: LOG test', { tags: '@smoke' }, () => {
     cy.task('log', `Environment variable for USER: ${Cypress.env('USER')}`)
     cy.InsertEmail(userName)
 
