@@ -47,17 +47,26 @@ jobs:
       BASE_URL_API: ${{ vars.BASE_URL_API }}
 
     steps:
-      - name: Send greeting
-        run: echo "input environment selected -> ${{ github.event.inputs.environment }}"
+      - name: see environment variables content
+        run: | #it sets multiple lines for the echo command
+          echo "Base URL web is $BASE_URL_WEB"
+          echo "Base URL API is $BASE_URL_API"
+          echo "Base USER is $USER"
+          echo "input environment selected -> ${{ github.event.inputs.environment }}"
+
+      # Checkout code
       - uses: actions/checkout@v4
 
+      # Setup Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: 22.x
 
+      # Install dependencies
       - name: Install dependencies
         run: npm ci
 
+      # Run Cypress tests
       - name: Cypress run api tests
         uses: cypress-io/github-action@v6
         with:
@@ -68,7 +77,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: playwright-report/index.html  
+          path: mochawesome-reports/index.html  
           retention-days: 1
 
       # Configure GitHub Pages
@@ -76,9 +85,8 @@ jobs:
 
       # Upload the HTML report as a GitHub Pages artifact
       - uses: actions/upload-pages-artifact@v3
-
         with:
-          path: playwright-report/
+          path: mochawesome-reports/
 
       # Deploy the HTML report to GitHub Pages
       - name: Deploy to GitHub Pages
