@@ -78,7 +78,7 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: test-results
-          path: mochawesome-reports/index.html  
+          path: cypress/mochawesome-reports/index.html  
           retention-days: 1
 
       # Configure GitHub Pages
@@ -89,7 +89,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         if: ${{ !cancelled() }}
         with:
-          path: mochawesome-reports/
+          path: cypress/mochawesome-reports/
 
 
       # Deploy the HTML report to GitHub Pages
