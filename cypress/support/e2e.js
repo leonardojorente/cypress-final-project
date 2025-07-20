@@ -13,8 +13,8 @@ before(() => {
   const userName = Cypress.env('USER')
   const password = Cypress.env('PASSWORD')
 
-  LoginPayload.email = userName
-  LoginPayload.senha = password
+  LoginPayload.email = userName.trim()
+  LoginPayload.senha = password.trim()
 
   //get token for api tests
   cy.doLoginAPI(LoginPayload)
