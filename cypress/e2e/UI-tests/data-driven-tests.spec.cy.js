@@ -14,6 +14,9 @@ const testData = [
 ]
 
 describe('E2E Login Tests', () => {
+      cy.fixture('data-driven/login-users').then((data) => {
+      dataDrivenFixture = data
+    })
   before(() => {
     cy.fixture('label-messages/toast-message').then((data) => {
       toastmessagedata = data
@@ -21,17 +24,16 @@ describe('E2E Login Tests', () => {
     cy.fixture('label-messages/top-menu-component').then((data) => {
       topMenuComponentData = data
     })
-    cy.fixture('data-driven/login-users').then((data) => {
-      dataDrivenFixture = data
-    })
+
   })
 
   beforeEach(() => {
     cy.visit(baseUrlWeb)
   })
 
+      testData.forEach((dataDriven) => {
   it(`TC01: data-driven test 1`, { tags: '@smoke' }, () => {
-    testData.forEach((dataDriven) => {
+
       cy.task('log', `Data Driven Test - USER: ${dataDriven.username}`)
       cy.task('log', `Data Driven Test - PASSWORD: ${dataDriven.password}`)
       cy.InsertEmail(dataDriven.username)

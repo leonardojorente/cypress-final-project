@@ -1,0 +1,93 @@
+name: 'full-workflow-githubPages'
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment to run the tests against'
+        required: true
+        type: environment
+        default: dev
+
+permissions:
+  pages: write
+  id-token: write        
+        
+jobs:
+  static-code-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x    
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check ESLint 
+        run: npm run eslint || true
+        # The '|| true' allows the workflow to continue even if the linting fails
+
+  e2e-tests-cypress:
+    needs: static-code-analysis
+    runs-on: ubuntu-latest
+    # this is used to specify the environment from where the env variables are read
+    environment: ${{ github.event.inputs.environment }}
+    container:
+      image: cypress/browsers:node-22.11.0-chrome-130.0.6723.69-1-ff-132.0-edge-130.0.2849.56-1
+      options: --user 1001
+
+    env:
+      USER:  ${{ vars.USER }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
+      BASE_URL_API: ${{ vars.BASE_URL_API }}
+
+    steps:
+      - name: Send greeting
+        run: echo "input environment selected -> ${{ github.event.inputs.environment }}"
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cypress run api tests
+        uses: cypress-io/github-action@v6
+        with:
+          command: npm run ui-mochaAwesomeReport || true
+          # The '|| true' allows the workflow to continue even if the tests fail
+
+      # upload html report results
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: playwright-report/index.html  
+          retention-days: 1
+
+      # Configure GitHub Pages
+      - uses: actions/configure-pages@v5 # upload test results
+
+      # Upload the HTML report as a GitHub Pages artifact
+      - uses: actions/upload-pages-artifact@v3
+
+        with:
+          path: playwright-report/
+
+      # Deploy the HTML report to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Show Report URL
+        if: ${{ !cancelled() && steps.deployment.outcome == 'success' }} 
+
+        run: |   
+          echo "📌 Playwright HTML Report: ${{ steps.deployment.outputs.page_url }}"
+

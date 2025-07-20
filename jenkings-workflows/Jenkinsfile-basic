@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Install dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+    stage('ESLint tests') {
+            steps {
+                sh 'npx eslint ./cypress --ext .js'
+            }
+        }
+    stage('Playright tests') {
+            steps {
+                echo 'Running playWright tests'
+            }
+        }
+    }
+}
