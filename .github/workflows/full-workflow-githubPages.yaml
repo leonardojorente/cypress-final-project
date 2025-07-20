@@ -75,6 +75,7 @@ jobs:
 
       # upload html report results
       - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
         with:
           name: test-results
           path: mochawesome-reports/index.html  
@@ -82,14 +83,18 @@ jobs:
 
       # Configure GitHub Pages
       - uses: actions/configure-pages@v5 # upload test results
+        if: ${{ !cancelled() }}
 
       # Upload the HTML report as a GitHub Pages artifact
       - uses: actions/upload-pages-artifact@v3
+        if: ${{ !cancelled() }}
         with:
           path: mochawesome-reports/
 
+
       # Deploy the HTML report to GitHub Pages
       - name: Deploy to GitHub Pages
+        if: ${{ !cancelled() }}
         id: deployment
         uses: actions/deploy-pages@v4
 
