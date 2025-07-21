@@ -70,7 +70,7 @@ jobs:
       - name: Cypress run cypress tests
         uses: cypress-io/github-action@v6
         with:
-          command: npm run api-login-tests || true
+          command: npm run ui-login-tests || true
           # The '|| true' allows the workflow to continue even if the tests fail
 
       # upload html report results
