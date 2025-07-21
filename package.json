@@ -7,7 +7,7 @@
     "ui-log-tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/log-tests.spec.cy.js'",
     "ui-cross-env-dev-tests": "cross-env TEST_ENV=dev npx cypress run --browser chrome --headless --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
     "ui-cross-env-prod-tests": "cross-env TEST_ENV=prod npx cypress run --browser chrome --headless --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
-    "ui-cross-env-ci-tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js",
+    "ui-cross-env-ci-tests": "npx cypress run --browser chrome --headless --spec 'cypress/e2e/UI-tests/cross-env-tests.spec.cy.js'",
     "ui-network-intercept-tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/network-intercept-tests.spec.cy.js'",
     "ui-data-driven-tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/data-driven-tests.spec.cy.js'",
     "api-tests": "cypress run --browser chrome --headless --spec cypress/e2e/API-tests/*.spec.cy.js",
