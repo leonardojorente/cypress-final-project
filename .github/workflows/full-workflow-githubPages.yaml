@@ -67,10 +67,10 @@ jobs:
         run: npm ci
 
       # Run Cypress tests
-      - name: Cypress run api tests
+      - name: Cypress run cypress tests
         uses: cypress-io/github-action@v6
         with:
-          command: npm run ui-mochaAwesomeReport || true
+          command: npm run ui-cross-env-ci-tests || true
           # The '|| true' allows the workflow to continue even if the tests fail
 
       # upload html report results
@@ -78,7 +78,7 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: test-results
-          path: cypress/mochawesome-reports/index.html  
+          path: cypress/reports/html/index.html  
           retention-days: 1
 
       # Configure GitHub Pages
@@ -89,7 +89,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         if: ${{ !cancelled() }}
         with:
-          path: cypress/mochawesome-reports/
+          path: cypress/reports/html/
 
 
       # Deploy the HTML report to GitHub Pages

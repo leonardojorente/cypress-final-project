@@ -1,0 +1,18 @@
+{
+  "reporterEnabled": "cypress-mochawesome-reporter, mocha-junit-reporter",
+  "mochaJunitReporterReporterOptions": {
+    "mochaFile": "cypress/reports/junit-results.xml"
+  },
+    "cypressMochaAwesomeReporterReporterOptions": {
+      "charts": true,
+      "reportPageTitle": "Cypress Test Report",
+      "overwrite": true,
+      "quiet": true,
+      "embeddedScreenshots": true,
+      "inlineAssets": true,
+      "saveAllAttemps": false,
+      "autoOpen": false,
+      "html": true,
+      "json": false
+    }
+}

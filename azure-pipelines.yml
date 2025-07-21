@@ -1,85 +1,77 @@
-name: Cross Env E2E Tests
+name: Azure E2E Tests
 
-trigger: none # Manual trigger only
+trigger: none  # Manual trigger only (equivalent to workflow_dispatch)
 
+# select enviroment to run manuaal tests
 parameters:
 - name: environment
-  displayName: 'Select the environment to run the tests against'
+  displayName: test environment
   type: string
-  default: dev
+  default: prod
   values:
-  - dev
-  - staging
   - prod
+  - dev
 
 variables:
-  USER: $(USER)
-  PASSWORD: $(PASSWORD)
-  BASE_URL_WEB: $(BASE_URL_WEB)
-  BASE_URL_API: $(BASE_URL_API)
-  vmImage: 'ubuntu-latest'
+- ${{ if eq(parameters.environment, 'prod') }}:
+    - group: 'variables_prod'
+- ${{ if eq(parameters.environment, 'dev') }}:
+    - group: 'variables_dev'
 
 jobs:
-- job: option_example
-  displayName: 'Option Example'
-  pool:
-    vmImage: $(vmImage)
-  steps:
-  - script: echo "input environment selected -> ${{ parameters.environment }}"
-    displayName: 'Send greeting'
-
-- job: pre_check
-  displayName: 'Pre-Check'
-  pool:
-    vmImage: 'ubuntu-latest'
-  steps:
-  - checkout: self
-    displayName: 'Checkout code'
-  
-  - task: NodeTool@0
-    displayName: 'Setup Node.js'
-    inputs:
-      versionSpec: '22.x'
-  
-  - script: npm ci
-    displayName: 'Install dependencies'
-  
-  - script: npx eslint ./cypress --ext .js
-    displayName: 'Check ESLint'
-
 - job: e2e_tests
-  displayName: 'E2E Tests'
-  dependsOn: pre_check
+  displayName: Run E2E Tests
   pool:
-    vmImage: $(vmImage)
-  container:
-    image: cypress/browsers:node-22.11.0-chrome-130.0.6723.69-1-ff-132.0-edge-130.0.2849.56-1
-    options: --user 1001
-  environment: ${{ parameters.environment }}
+    #vmImage: 'ubuntu-20.04' #free ubuntu image available for Azure DevOps
+    name: 'Default' # use my self-hosted agent
+    demands:
+      - agent.name -equals AgentSelfHosted  # Substitua pelo nome da máquina
+
   steps:
-  - script: echo "The USER is $(USER) and the base url is $(BASE_URL_WEB)"
-    displayName: 'Read variables'
-    env:
-      USER: $(USER)
-      PASSWORD: $(PASSWORD)
-      BASE_URL_WEB: $(BASE_URL_WEB)
-      BASE_URL_API: $(BASE_URL_API)
-  
+    # print environment variables
+  - script: |
+      echo "========== PRINTING VARIABLES =========="
+      echo "Build ID: $(Build.BuildId)"
+      echo "Build Number: $(Build.BuildNumber)"
+      echo "Environment: ${{ parameters.environment }}"
+      echo "BASE_URL_WEB: $(BASE_URL_WEB)"
+      echo "BASE_URL_API: $(BASE_URL_API)"
+      echo "USER: $(USER)"
+      echo "PASSWORD: $(PASSWORD)"
+      echo "Agent Name: $(Agent.Name)"
+      echo "Agent OS: $(Agent.OS)"
+      echo "========================================"
+    displayName: 'Set and Print Variables'
+
   - checkout: self
     displayName: 'Checkout code'
-  
+
   - task: NodeTool@0
     displayName: 'Setup Node.js'
     inputs:
       versionSpec: '22.x'
-  
+
   - script: npm ci
     displayName: 'Install dependencies'
-  
-  - script: npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/log-tests.spec.cy.js' --env allure=true
-    displayName: 'Cypress run api tests'
+
+  - script: npm run ui-cross-env-ci-tests || true
+    displayName: 'Run Cypress tests'
     env:
-      USER: $(USER)
-      PASSWORD: $(PASSWORD)
-      BASE_URL_WEB: $(BASE_URL_WEB)
-      BASE_URL_API: $(BASE_URL_API)
+      CI: true
+      PASSWORD: $(PASSWORD) # Explicit mapping for secret variable
+
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: 'cypress/reports/html'
+      artifact: 'cypress-html-report'
+      publishLocation: 'pipeline'
+    condition: succeededOrFailed()  # Always publish the report, even if tests fail
+    displayName: 'Publish Cypress artifact report html'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/junit-*.xml'
+    condition: succeededOrFailed()  # Always publish the report, even if tests fail
+    displayName: 'Publish Cypress junit report'  
