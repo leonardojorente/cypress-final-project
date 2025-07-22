@@ -65,13 +65,15 @@ pipeline {
             post {
                 always {
                     publishHTML (
-                        target : [allowMissing: false,
-                        alwaysLinkToLastBuild: true,
-                        keepAll: true,
-                        reportDir: 'cypress/reports/html/index.html',
-                        reportFiles: 'index.html',
-                        reportName: 'Cypress Report',
-                        reportTitles: 'Cypress Tests Report'])
+                        target : [
+                            allowMissing: false,
+                            alwaysLinkToLastBuild: false,
+                            keepAll: false,
+                            reportDir: 'cypress/reports/html',
+                            reportFiles: 'index.html',
+                            reportName: 'Cypress Report',
+                            reportTitles: 'Cypress Tests Report'
+                        ]), 
                 }
             }
         }
