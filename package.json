@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "eslint": "eslint ./cypress --ext .js",
+    "eslint": "eslint ./cypress/e2e --ext .js",
     "ui-basic-tests": "npx cypress run --browser chrome --headless --spec 'cypress/e2e/UI-tests/basic-tests.spec.cy.js'",
     "ui-login-tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/login-tests.spec.cy.js'",
     "ui-account-tests": "npx cypress run --browser chrome --headless --quiet --spec 'cypress/e2e/UI-tests/account-tests.spec.cy.js'",

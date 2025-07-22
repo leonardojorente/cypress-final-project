@@ -3,7 +3,7 @@ import '../../support/commands/ui-commands/component-commands/app-header-compone
 import locators from '../../support/locators.js'
 
 let toastmessagedata
-let topMenuComponentData
+
 const baseUrlWeb = Cypress.env('BASE_URL_WEB')
 const userName = Cypress.env('USER')
 const password = Cypress.env('PASSWORD')
@@ -11,9 +11,6 @@ const password = Cypress.env('PASSWORD')
 describe('E2E Login Tests', () => {
   before(() => {
     //captures the json data for the tests
-    cy.fixture('label-messages/top-menu-component').then((data) => {
-      topMenuComponentData = data
-    })
     cy.fixture('label-messages/toast-message').then((data) => {
       toastmessagedata = data
     })
