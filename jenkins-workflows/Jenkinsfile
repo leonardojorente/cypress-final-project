@@ -73,7 +73,8 @@ pipeline {
                             reportFiles: 'index.html',
                             reportName: 'Cypress Report',
                             reportTitles: 'Cypress Tests Report'
-                        ]), 
+                        ]
+                    ) 
                 }
             }
         }
