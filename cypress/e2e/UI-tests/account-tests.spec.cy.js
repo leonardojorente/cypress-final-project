@@ -1,8 +1,9 @@
 import '../../support/commands/ui-commands/login-commands.js'
 import '../../support/commands/ui-commands/component-commands/app-header-component-commands.js'
+import '../../support/commands/ui-commands/component-commands/toast-component-commands.js'
 import '../../support/commands/ui-commands/account-commands.js'
 import Utils from '../../support/commands/utils/utils-commands.js'
-import locators from '../../support/locators.js'
+import { ToastComponentLocators } from '../../support/commands/ui-commands/component-commands/toast-component-commands.js'
 
 let topMenuComponentData
 let toastmessagedata
@@ -24,16 +25,16 @@ describe('E2E Account Tests', () => {
     cy.visit(baseUrlWeb)
 
     //clean app data
-    cy.SelectSettingsOption(topMenuComponentData.settings_option_reset)
-    cy.get(locators.TOAST_MESSAGE, { timeout: 10000 }).should('contain',toastmessagedata.successResetData)
+    cy.selectSettingsOption(topMenuComponentData.settings_option_reset)
+    cy.getToastMessage().should('contain',toastmessagedata.successResetData)
   })
 
   it('AccountTC01: Add account', { tags: '@smoke' }, () => {
     const accountName = `randomAccountName ${Utils.generateRandomString(4)}`
-    cy.SelectSettingsOption(topMenuComponentData.settings_option_accounts)
-    cy.InsertAccountName(accountName)
-    cy.ClickSaveAccountBtn()
+    cy.selectSettingsOption(topMenuComponentData.settings_option_accounts)
+    cy.insertAccountName(accountName)
+    cy.clickSaveAccountBtn()
 
-    cy.get(locators.TOAST_MESSAGE, { timeout: 10000 }).should('contain',toastmessagedata.successAddAccountData)
+    cy.getToastMessage().should('contain',toastmessagedata.successAddAccountData)
   })
 })

@@ -1,6 +1,6 @@
 import '../../support/commands/ui-commands/login-commands.js'
 import '../../support/commands/ui-commands/component-commands/app-header-component-commands.js'
-import locators from '../../support/locators.js'
+import '../../support/commands/ui-commands/component-commands/toast-component-commands.js'
 
 let toastmessagedata
 const baseUrlWeb = Cypress.env('BASE_URL_WEB')
@@ -22,13 +22,13 @@ describe('E2E Login Tests', () => {
 
   it('TC01: Cross env test', { tags: '@smoke' }, () => {    
     cy.task('log', `Environment variable for USER: ${Cypress.env('USER')}`)
-    cy.InsertEmail(userName)
+    cy.insertEmail(userName)
 
     cy.task('log', `Environment variable for PASSWORD: ${Cypress.env('PASSWORD')}`)
-    cy.InsertPassword(password)
+    cy.insertPassword(password)
 
-    cy.ClickLoginButton()
+    cy.clickLoginButton()
 
-    cy.get(locators.TOAST_MESSAGE, { timeout: 10000 }).should('contain',toastmessagedata.successLoginToastMessage) 
+    cy.getToastMessage().should('contain', toastmessagedata.successLoginToastMessage)
   })
 })
