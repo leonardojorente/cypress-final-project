@@ -1,14 +1,16 @@
+import { faker } from '@faker-js/faker'
+
 class Utils {
+    generateRandomAlphaNumericString(length) {
+      return faker.string.alphanumeric(length)
+    }
+
     generateRandomString(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      return faker.string.alpha(length)
     }
 
-    return result;
+    generateRandomNumberString(length) {
+      return faker.string.numeric(length)
     }
-
 }
 export default new Utils()

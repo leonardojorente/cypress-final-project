@@ -1,15 +1,16 @@
-import { generateRandomString } from '../../support/commands/utils/utils-commands.js';
+import  Utils from '../../support/commands/utils/utils-commands.js';
 import  TransactionPayload  from '../../fixtures/request-payloads/post-transacoes-payload.json';
 import  AccountPayload  from '../../fixtures/request-payloads/post-contas-payload.json';
 import '../../support/commands/api-commands/login-commands.js'
 import '../../support/commands/api-commands/account-commands.js'
 import '../../support/commands/api-commands/transaction-commands.js'
+import {generateTransaction} from '../../support/factories/transactionFactory.js'
 
 let accountId
 describe('API transaction Tests', () => {
-  before(() => {
+  beforeEach(() => {
     //create account for transaction
-    AccountPayload.nome = `randomAccountName ${generateRandomString(4)}`
+    AccountPayload.nome = `randomAccountName ${Utils.generateRandomString(4)}`
     
     cy.createAccount(AccountPayload).then(response =>{
       accountId = response.body.id
@@ -25,8 +26,8 @@ describe('API transaction Tests', () => {
 
     TransactionPayload.data_pagamento = currentDate;
     TransactionPayload.data_transacao = currentDate;
-    TransactionPayload.descricao = `description ${generateRandomString(3)}`;
-    TransactionPayload.envolvido = `interested ${generateRandomString(3)}`;
+    TransactionPayload.descricao = `description ${Utils.generateRandomString(3)}`;
+    TransactionPayload.envolvido = `interested ${Utils.generateRandomString(3)}`;
     TransactionPayload.conta_id = accountId
 
     cy.createNewTransaction(TransactionPayload).then(response =>{
@@ -35,4 +36,14 @@ describe('API transaction Tests', () => {
       expect(response.body.descricao).to.be.equal(TransactionPayload.descricao)
     })
   })
+
+  it('AccountTC02: Create a new trasaction by api using transaction factory', { tags: 'smoke' }, () => {
+    const transactionPayloadWithFactory = generateTransaction({ conta_id: accountId, valor: Utils.generateRandomNumberString(3) });
+
+    cy.createNewTransaction(transactionPayloadWithFactory).then(response =>{
+      expect(response.status).to.be.equal(201)
+      expect(response.duration).to.not.be.greaterThan(1000)
+      expect(response.body.descricao).to.be.equal(transactionPayloadWithFactory.descricao)
+    })
+  })  
 })
